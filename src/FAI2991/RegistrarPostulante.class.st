@@ -198,6 +198,7 @@ RegistrarPostulante >> mostrarFormularioE [
 	postulantePersona hide.
 	postulanteEmpresa hide.
 	postulanteEmpresaCombinada hide.
+	tituloRub show.
 	nombre show.
 	DNI  hide. 
 	listadoPostulantes show.
@@ -221,6 +222,7 @@ RegistrarPostulante >> mostrarFormularioEC [
 	postulanteEmpresa hide.
 	postulanteEmpresaCombinada hide.
 	nombre show.
+	tituloRub show.
 	DNI  hide. 
 	listadoPostulantes show.
  	tipo show. 
