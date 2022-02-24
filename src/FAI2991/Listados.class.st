@@ -143,7 +143,8 @@ Listados >> mostrarListados [
 
 { #category : #updating }
 Listados >> update: lis [
+lis ifNotNil:[
 	lis
 		ifEmpty: [ listado setText: 'Listados' ]
-		ifNotEmpty: [ listado setText: (UnGestor colAString:lis) ]
+		ifNotEmpty: [ listado setText: (UnGestor colAString:lis) ]].
 ]

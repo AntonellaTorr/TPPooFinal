@@ -32,7 +32,10 @@ Solicitud >> estaPendiente [
 
 { #category : #'as yet unclassified' }
 Solicitud >> estaVencida [
-^(fechaValidez < Date today). 
+|res|
+res:=(fechaValidez < Date today).
+res ifTrue: [ self setEstado: 'Vencida' ].
+^res.
 ]
 
 { #category : #'as yet unclassified' }

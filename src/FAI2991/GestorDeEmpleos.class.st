@@ -170,7 +170,7 @@ res changed.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoSolPendientes:nombreEmpresa [
 | empresaBuscada listado|
-empresaBuscada:= colEmpresasSolicitantes  detect:[:empresaSol| (empresaSol getEmpresa )esEmpresaBuscada:nombreEmpresa].
+empresaBuscada:= colEmpresasSolicitantes  detect:[:empresaSol| (empresaSol getEmpresa )esEmpresaBuscada:nombreEmpresa] ifNone:[nil].
 (empresaBuscada isNotNil)
 ifTrue:[listado:= (empresaBuscada buscarSolicitudesPendientes)].
 listado changed.
@@ -338,20 +338,20 @@ res:= (self buscarEmpresaSolicitante: nombreEmpresa).
 (res isNotNil )
 ifTrue: [ 
 	(empresaBuscada:= res).
-	    (self verificarRepetidos: unID) 
-	ifFalse: [solPendiente:= (empresaBuscada crearYAnadirSolicitudConId: unID fechaValidez: fechaVal caracteristicas:car tipo:tip monto:m producto:prod).
+	solPendiente:= (empresaBuscada crearYAnadirSolicitudConId: unID fechaValidez: fechaVal caracteristicas:car tipo:tip monto:m producto:prod).
 	colSolicitudesSinResolver add: solPendiente ].
-	 ].
-colSolicitudesSinResolver changed].
+	 .
+colSolicitudesSinResolver changed.]
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> revalidarSolicitud: id nuevaFecha:fecha [
 |sol|
 sol:=colSolicitudesVencidas detect: [:solicitud|(solicitud getId)=id] ifNone: [ ]. 
+sol ifNotNil: [ 
 sol revalidar: fecha.
 colSolicitudesVencidas remove:sol.
-colSolicitudesSinResolver add:sol.
+colSolicitudesSinResolver add:sol].
 ]
 
 { #category : #printing }
