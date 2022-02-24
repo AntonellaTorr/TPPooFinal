@@ -33,7 +33,7 @@ Listados >> crearComponentes [
 	nombreE:= RubTextFieldMorph new. 
 	nombreE extent: 250 @ 90; left: espacioDerecha ; top: 60; ghostText: 'Ingrese el nombre'; borderStyle: (BottomBorder new width: 2); color: (Color r: 0.40 g: 0.42 b: 0.60).
 		
-   titulo1 := Titulo crearConTitulo: 'Selecione la fecha' tam:  11.
+   titulo1 := Titulo crearConTitulo: 'Seleccione la fecha' tam:  11.
 	titulo1 left: espacioDerecha; top:60;color: Color white.  
 	
 	botonGenerarE left: espacioDerecha ; top: 100.

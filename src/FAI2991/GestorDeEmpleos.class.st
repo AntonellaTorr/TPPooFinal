@@ -28,14 +28,18 @@ Empresa valorPorPunto: 10.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> aceptarPropuesta:idSol nombrePos:nombre [
 |prop sol|
-
+"Busca la propuesta con la solicitud y postulante deseados"
 prop:=self buscarPropuesta:idSol nombrePos: nombre. 
 (prop isNotNil) 
 ifTrue:[sol:=prop getSolicitud.
+	"se eliminan las postulaciones con dicha solicitud"
 self eliminarPostulaciones: sol.
+"se setea en resuelta la propuesta y la solicitud"
 prop setEstado:'resuelta'.
 sol setEstado: 'resuelta'.
+" se actualiza la cantidad de solicitudes resueltas de la empresa que presento la solicitud"
 self actualizarInfoEmpresaSol: idSol.
+"se actualiza la informacion en el gestor"
 colSolicitudesResueltas add: sol.
 colSolicitudesSinResolver remove: sol.
 ].
@@ -45,13 +49,16 @@ colSolicitudesSinResolver remove: sol.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> actualizarInfoEmpresaSol:id [
 |empresaBuscada|
+"se busca la empresa que presento solicitud con el id"
 empresaBuscada:=colEmpresasSolicitantes detect:[:empresa| empresa tieneSolConId:id] ifNone: [ nil. ].
+"se incrementa la cantidad de solicitudes resueltas"
 empresaBuscada ifNotNil: [ empresaBuscada actualizarCantSolicitudesResueltas ].
 
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> buscarEmpresa:nombreEmpresa [
+"Se busca la empresa con el nombre recibido por parametro"
 |res|
 (colPostulantes isNotNil) ifTrue:[
  res:= colPostulantes  detect: [ : emp| emp esEmpresaBuscada:nombreEmpresa]
@@ -63,6 +70,7 @@ ifNone: [ res:=nil ].].
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> buscarEmpresaSolicitante:nombreEmpresa [
 |res|
+"se busca la empresa solicitante con el nombre recibido por parametro"
  res:= colEmpresasSolicitantes detect: [ : emp| emp getEmpresa esEmpresaBuscada:nombreEmpresa]
 ifNone: [ res:=nil ].
 ^res.
@@ -71,17 +79,15 @@ ifNone: [ res:=nil ].
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> buscarPropuesta:idSol nombrePos: nombre [
 |res|
-Transcript show: 'idSol buscada ',idSol. 
-Transcript show: 'nombre buscado ',nombre. 
-"colPropuestas do:[: prop| Transcript show: ((((prop getSolicitud) getId)= idSol)  & (((prop getPostulante)getNombre)=nombre)) asString ]".
+"se busca la propuesta con el id de sol y postulante"
 res:= colPropuestas detect:[: prop| (((prop getSolicitud) getId)= idSol)  & (((prop getPostulante)getNombre)=nombre) ] ifNone:[res:=nil].
-Transcript show: 'Resultado'.
 ^res.
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> buscarPropuestasConId:id [
 |colP|
+"se buscan todas las propuestas con solicitudes con el id recibido por parametro"
 (colPropuestas  isNotNil) 
 ifTrue:[
 	colP:=colPropuestas select:[:prop| ((prop getSolicitud) getId) = id]] 
@@ -92,6 +98,7 @@ ifFalse:[ colP:= OrderedCollection new. colP add: 'VACIA'.].
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> colAString: col [
 | cadena |
+"pasa la coleccion recibida por parametro a cadena"
     cadena := ''.
     col do: [ :s |cadena := cadena ,s toString , String cr ].
     ^ cadena 
@@ -102,7 +109,9 @@ GestorDeEmpleos >> controlFraude:pos solicitud:sol [
 |empresaBuscada  tieneFraude  |
 tieneFraude:=false. 
 (colEmpresasSolicitantes  isNotNil) ifTrue:[
+	"busca a la empresa recibida por parametro en la col de empresas solicitantes"
 empresaBuscada:= colEmpresasSolicitantes detect:[:empresaSol| ((empresaSol getEmpresa)= pos)] ifNone:[].
+"verifica si esta haciendo fraude"
 (empresaBuscada isNotNil) ifTrue: [tieneFraude:= ((empresaBuscada getColSolicitudes) includes:sol)]].
 ^tieneFraude
 
@@ -111,6 +120,7 @@ empresaBuscada:= colEmpresasSolicitantes detect:[:empresaSol| ((empresaSol getEm
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> crearEmpresaSegunCorresponda:nombreEmpresa rubro: inc tipo:tipo rango: ran productos:colP [
 |empresa|
+"si la coleccion de productos es vacia crea una instancia de empresa y sino de empresa combinada"
 
 (colP isEmpty) 
 	ifTrue: [ empresa:= (Empresa crearCon: inc nombre: nombreEmpresa tipo:  tipo rango: ran) ]
@@ -121,6 +131,7 @@ GestorDeEmpleos >> crearEmpresaSegunCorresponda:nombreEmpresa rubro: inc tipo:ti
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> eliminarPostulaciones:sol [
 |nuevaCol|
+"elimina las postulaciones con la solicitud recibida por parametro"
 (colPropuestas isNotNil) 
 ifTrue:[
 nuevaCol:=colPropuestas reject: [ :prop| prop esPropuestaBuscada:sol ].
@@ -131,6 +142,7 @@ colPropuestas := nuevaCol.]
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> encontrarPostulantes: sol [
  | colPos |
+"encuentra a los postulantes que cumplen los requisitos para atender la solicitud recibida por parametro"
     colPos := OrderedCollection new.
     colPostulantes ifNotNil: [ 
 	colPos:= colPostulantes select: [ :pos | (sol cumpleRequisitos: pos)] ].
@@ -139,21 +151,25 @@ GestorDeEmpleos >> encontrarPostulantes: sol [
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> existePostulante:nombreP [
+"busca el postulante recibido por parametro retorna true si lo encuentra"
 ^colPostulantes anySatisfy: [ :postulante| postulante esPostulanteBuscado: nombreP ].
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> existePropuesta: sol postulante:postulante [
+"verifica si existe la propuesta con el la solicitud y postulante recibidos por parametro"
 ^colPropuestas  anySatisfy: [ :prop|((prop getSolicitud)=sol) & ((prop getPostulante)= postulante) ]
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> existeSolicitud:id [
+"verifica si existe la solicitud con el id recibido"
 ^colSolicitudesSinResolver anySatisfy: [:sol| (sol getId=id)]. 
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoEmpresasOrdenadas [
+"ordena las empreas solicitantes segun la cantidad de solicitudes resueltas"
 colEmpresasSolicitantes sorted: [ :a :b| a getCantSolicitudesResueltas  > b getCantSolicitudesResueltas ].
 colEmpresasSolicitantes changed. 
 ^colEmpresasSolicitantes 
@@ -162,6 +178,7 @@ colEmpresasSolicitantes changed.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoSolFecha:fechaBuscada [
 |res|
+"busca las solicitudes que se presentaron en la fecha recibida por parametro"
 res:=colSolicitudesSinResolver select: [:solicitud| solicitud cumpleCondiciones:fechaBuscada].
 res changed.
 ^ res
@@ -170,8 +187,10 @@ res changed.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoSolPendientes:nombreEmpresa [
 | empresaBuscada listado|
+"busca la empresa cuyo nombre es el recibido por parametro"
 empresaBuscada:= colEmpresasSolicitantes  detect:[:empresaSol| (empresaSol getEmpresa )esEmpresaBuscada:nombreEmpresa] ifNone:[nil].
 (empresaBuscada isNotNil)
+"busca las solicitudes pendientes"
 ifTrue:[listado:= (empresaBuscada buscarSolicitudesPendientes)].
 listado changed.
 ^listado.
@@ -179,15 +198,18 @@ listado changed.
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoSolResueltas [
+"devuelve las solicitudes resueltas"
 colSolicitudesResueltas changed.
 ^colSolicitudesResueltas 
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarPropuestasSolicitudesPendientes [
+
 	colSolicitudesSinResolver ifNotNil: [ 
 		| colPosiblesPos  |
 		colPosiblesPos:= OrderedCollection new.
+		"para cada solicitud busca posibles postulantes y crear las propuestas"
 		colSolicitudesSinResolver do: [ :soli | 
 			colPosiblesPos := self encontrarPostulantes:soli.
 			self realizarPropuesta: soli posiblesPos: colPosiblesPos ] ]
@@ -229,8 +251,11 @@ colSolicitudesVencidas := OrderedCollection new.
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> iniciarDia [
 |nuevaCol |
+"rechaza las solicitudes vencidas y se queda con las actuales"
 nuevaCol:= colSolicitudesSinResolver  reject: [:solResuelta| solResuelta estaVencida ].
- colSolicitudesSinResolver  do: [:solResuelta| (solResuelta estaVencida) ifTrue:[ colSolicitudesVencidas add: solResuelta ]].
+
+ colSolicitudesResueltas   do: [:solResuelta| (solResuelta estaVencida) ifTrue:[ colSolicitudesVencidas add: solResuelta ]].
+"actualiza col solicitudes sin resolver"
 colSolicitudesSinResolver  := nuevaCol. 
 
 ]

@@ -35,10 +35,10 @@ RegistrarEmpresaSolicitante >> crearComponentes [
 
     espacioDerecha:= self left + 100.
 
-    tituloRub := Titulo crearConTitulo: 'Selecione el rubro' tam:  11.
+    tituloRub := Titulo crearConTitulo: 'Seleccione el rubro' tam:  11.
 	 tituloRub top: 100; left: espacioDerecha; color: Color white .
 
-	 tituloProd := Titulo crearConTitulo: 'Selecione los productos(si posee)' tam:  11.
+	 tituloProd := Titulo crearConTitulo: 'Seleccione los productos(si posee)' tam:  11.
 	 tituloProd top: 250; left: espacioDerecha; color: Color white .	
 
 
