@@ -20,14 +20,17 @@ Class {
 		'guardadoPersona',
 		'guardadoEmpresa',
 		'guardadoEmpresaC',
-		'tituloRub'
+		'tituloRub',
+		'tituloRan',
+		'tituloTipo',
+		'tituloProd'
 	],
 	#category : #FAI2991
 }
 
 { #category : #'as yet unclassified' }
 RegistrarPostulante >> crearComponentes [
-| espacioDerecha titulo1 colR  colR2 colR3 colP| 
+| espacioDerecha  colR  colR2 colR3 colP| 
 	postulantePersona := Boton nombre: 'Postulante Persona' tamanio: 200 @ 30.
 	postulanteEmpresa := Boton nombre: 'Postulante Empresa' tamanio: 200 @ 30.
 	postulanteEmpresaCombinada  := Boton nombre: 'Postulante Empresa Combinada' tamanio: 200 @ 30.
@@ -44,7 +47,7 @@ RegistrarPostulante >> crearComponentes [
 	nombre :=RubTextFieldMorph new.
 	DNI:=RubTextFieldMorph new. 
 	"rango := RubTextFieldMorph new." 
-	guardadoPersona:= Boton nombre: 'Registrar persona' tamanio: 200 @ 30.
+	guardadoPersona:= Boton nombre: 'Registrar Persona' tamanio: 200 @ 30.
 	guardadoEmpresa:= Boton nombre: 'Registrar Empresa' tamanio: 200 @ 30. 
 	guardadoEmpresaC:= Boton nombre: 'Registrar Empresa Combinada' tamanio: 200 @ 30.
 
@@ -59,7 +62,7 @@ RegistrarPostulante >> crearComponentes [
 	
 	guardadoPersona  left: self left + 150 ;top:400.
 	guardadoEmpresa left: self left + 150; top:400.
-	guardadoEmpresaC left: self left + 100; top:400.
+	guardadoEmpresaC left: self left + 100; top:500.
 	
 	listadoPostulantes  beReadOnly; extent: 300 @ 500; left: self left + 500; top: 60.
 	
@@ -67,32 +70,36 @@ RegistrarPostulante >> crearComponentes [
  	DNI extent: 400 @ 90; left: espacioDerecha ; top:  200; ghostText: 'Ingrese el DNI sin puntos'; borderStyle: 	(BottomBorder new width: 2); color: (Color black).
 			
 	
-    tituloRub := Titulo crearConTitulo: 'Selecione el rubro/incumbencias' tam:  11.
+    tituloRub := Titulo crearConTitulo: 'Seleccione el rubro/incumbencias' tam:  11.
 	 tituloRub top: 100; left: espacioDerecha; color: Color white .	
-	
+	 tituloRan := Titulo crearConTitulo: 'Seleccione el rango' tam:  11.
+	 tituloRan top: 200; left: espacioDerecha; color: Color white .		
+	 tituloProd := Titulo crearConTitulo: 'Seleccione los productos' tam:  11.
+	 tituloProd top: 320; left: espacioDerecha; color: Color white .		
+						
     rubro1 label: 'Ropa'; extent: 100 @ 20; left: espacioDerecha ; top: nombre bottom + 50.
     rubro2 label: 'Limpieza'; extent: 100 @ 20; left: espacioDerecha + 100; top: nombre bottom + 50.
     rubro3 label: 'Mecanica'; extent: 100 @ 20; left: espacioDerecha ; top: nombre bottom + 90.
     rubro4 label: 'Construccion'; extent: 100 @ 20; left: espacioDerecha + 100; top: nombre bottom + 90.	
 	
-	 producto1 label: 'Conteiner'; extent: 100 @ 20; left: espacioDerecha  ; top: rubro2 bottom + 150.
-    producto2 label: 'Cartel'; extent: 100 @ 20; left: espacioDerecha + 100; top: rubro2 bottom + 150.
-    producto3 label: 'Ladrillos'; extent: 100 @ 20; left: espacioDerecha  ; top:  rubro2 bottom + 200.
+	 producto1 label: 'Conteiner'; extent: 100 @ 20; left: espacioDerecha  ; top: 350.
+    producto2 label: 'Cartel'; extent: 100 @ 20; left: espacioDerecha + 100; top: 350.
+    producto3 label: 'Ladrillos'; extent: 100 @ 20; left: espacioDerecha  ; top:  400.
 	 tipo content: 'Actividades Uniformes'.
 	 tipo content: 'Actividades Puntuales'.
 	 tipo content: 'Combinadas'.
 	   
-	 titulo1:= Titulo crearConTitulo: 'Seleccione el tipo de empresa' tam: 11.
+	 tituloTipo:= Titulo crearConTitulo: 'Seleccione el tipo de empresa' tam: 11.
 	 espacioDerecha:= self left + 100.
-	 titulo1 top: 30; left: espacioDerecha; color: Color white. 
-	 tipo extent: 200 @ 20; left: espacioDerecha ; top: 250.
+	 tituloTipo top: 270; left: espacioDerecha; color: Color white. 
+	 tipo extent: 200 @ 20; left: espacioDerecha ; top: 290.
 	
 	 rango content: '100'.
 	 rango content: '150'.
 	 rango content: '200'.
 	 rango content: '250'.	
 	 rango content: '300'. 
-	 rango extent: 200 @ 20; left: espacioDerecha ; top: 200.
+	 rango extent: 200 @ 20; left: espacioDerecha ; top: 230.
 	
 
 	   UnGestor addDependent: self.
@@ -104,7 +111,7 @@ RegistrarPostulante >> crearComponentes [
 	addMorph: postulanteEmpresaCombinada ;
 	addMorph: nombre; 
 	addMorph: DNI; 
-	addMorph: listadoPostulantes ; 
+	addMorph: listadoPostulantes;	 
 	addMorph: guardadoPersona ; 
 	addMorph: guardadoEmpresa ; 
 	addMorph: guardadoEmpresaC ; 
@@ -116,6 +123,9 @@ RegistrarPostulante >> crearComponentes [
    addMorph: rubro4;
 	addMorph: producto1;
 	addMorph: producto2;
+	addMorph: tituloTipo;
+	addMorph: tituloRan;
+	addMorph: tituloProd;
 	addMorph: producto3.
 	
   	self iniciar.	
@@ -168,6 +178,9 @@ postulantePersona show.
 postulanteEmpresa show.
 postulanteEmpresaCombinada show.
 tituloRub hide. 
+tituloRan hide.
+tituloTipo hide.
+tituloProd hide.
  nombre hide.
  DNI hide.  
 listadoPostulantes hide. 
@@ -199,6 +212,9 @@ RegistrarPostulante >> mostrarFormularioE [
 	postulanteEmpresa hide.
 	postulanteEmpresaCombinada hide.
 	tituloRub show.
+	tituloRan show.
+	tituloTipo show.
+	tituloProd hide.
 	nombre show.
 	DNI  hide. 
 	listadoPostulantes show.
@@ -223,6 +239,9 @@ RegistrarPostulante >> mostrarFormularioEC [
 	postulanteEmpresaCombinada hide.
 	nombre show.
 	tituloRub show.
+	tituloRan show.
+	tituloTipo show.
+	tituloProd show.
 	DNI  hide. 
 	listadoPostulantes show.
  	tipo show. 
@@ -247,6 +266,9 @@ RegistrarPostulante >> mostrarFormularioP [
 	nombre show.
 	DNI  show. 
 	tituloRub show.
+	tituloRan hide.
+	tituloTipo hide.
+	tituloProd hide.
 	listadoPostulantes show.
  	tipo hide. 
 	rango hide.

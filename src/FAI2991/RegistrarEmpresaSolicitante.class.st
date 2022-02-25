@@ -13,14 +13,18 @@ Class {
 		'producto2',
 		'producto3',
 		'listadoEmpresasSol',
-		'tipo'
+		'tipo',
+		'tituloRan',
+		'tituloProd',
+		'tituloTipo',
+		'tituloRub'
 	],
 	#category : #FAI2991
 }
 
 { #category : #'as yet unclassified' }
 RegistrarEmpresaSolicitante >> crearComponentes [
-    | espacioDerecha tituloRub tituloProd|
+    | espacioDerecha|
     botonRegistrar    := Boton nombre: 'Guardar' tamanio: 200 @ 30.
     nombreEmpresa     := RubTextFieldMorph new.
     rango             := SearchMorph new.
@@ -39,7 +43,12 @@ RegistrarEmpresaSolicitante >> crearComponentes [
 	 tituloRub top: 100; left: espacioDerecha; color: Color white .
 
 	 tituloProd := Titulo crearConTitulo: 'Seleccione los productos(si posee)' tam:  11.
-	 tituloProd top: 250; left: espacioDerecha; color: Color white .	
+	 tituloProd top: 270; left: espacioDerecha; color: Color white .	
+	
+	 tituloRan := Titulo crearConTitulo: 'Seleccione el rango' tam:  11.
+	 tituloRan top: 200; left: espacioDerecha; color: Color white .	
+    tituloTipo:= Titulo crearConTitulo: 'Seleccione el tipo de empresa' tam: 11.
+	 tituloTipo top: 380; left: espacioDerecha; color: Color white. 
 
 
 
@@ -52,17 +61,17 @@ RegistrarEmpresaSolicitante >> crearComponentes [
     rubro3 label: 'Mecanica'; extent: 100 @ 20; left: espacioDerecha ; top: nombreEmpresa bottom + 90.
     rubro4 label: 'Construccion'; extent: 100 @ 20; left: espacioDerecha + 100; top: nombreEmpresa bottom + 90.
 
- 	 producto1 label: 'Cartel'; extent: 100 @ 20; left: espacioDerecha  ; top: nombreEmpresa bottom + 200.
-    producto2 label: 'Conteiner'; extent: 100 @ 20; left: espacioDerecha + 100; top: nombreEmpresa bottom + 200.
-    producto3 label: 'Ladrillos'; extent: 100 @ 20; left: espacioDerecha  ; top: nombreEmpresa bottom + 250.
+ 	 producto1 label: 'Cartel'; extent: 100 @ 20; left: espacioDerecha  ; top: nombreEmpresa bottom + 220.
+    producto2 label: 'Conteiner'; extent: 100 @ 20; left: espacioDerecha + 100; top: nombreEmpresa bottom + 220.
+    producto3 label: 'Ladrillos'; extent: 100 @ 20; left: espacioDerecha  ; top: nombreEmpresa bottom + 270.
 
 
 
    
 
- 	rango extent: 200 @ 20; left: espacioDerecha ; top: 200.
+ 	rango extent: 200 @ 20; left: espacioDerecha ; top: 230.
 
-    botonRegistrar left: espacioDerecha ; top: 450.
+    botonRegistrar left: espacioDerecha ; top: 500.
 
     listadoEmpresasSol beReadOnly; extent: 300 @ 500; left: self left + 500; top: 60.
 
@@ -70,7 +79,7 @@ RegistrarEmpresaSolicitante >> crearComponentes [
 		tipo content: 'Actividades Uniformes'.
 		tipo content: 'Actividades Puntuales'.
 		tipo content: 'Combinadas'.
-		tipo  left: espacioDerecha ; top: 370.
+		tipo  left: espacioDerecha ; top: 400.
 		rango content: '100'.
 		rango content: '150'.
 	 	rango content: '200'.
@@ -89,6 +98,8 @@ RegistrarEmpresaSolicitante >> crearComponentes [
   		  addMorph: producto1;
         addMorph: producto2;
         addMorph: producto3;
+		  addMorph:tituloTipo;
+		  addMorph:tituloRan;
         addMorph: listadoEmpresasSol;
 		  addMorph: tipo. 
 		
