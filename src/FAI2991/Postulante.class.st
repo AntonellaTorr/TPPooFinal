@@ -12,6 +12,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Postulante >> esEmpresaCombinada [ 
+^false. 
+]
+
+{ #category : #'as yet unclassified' }
+Postulante >> esPersona [
+^false.
+]
+
+{ #category : #'as yet unclassified' }
 Postulante >> esPostulanteBuscado:nombreP [
 ^(nombreP=nombre)
 ]
@@ -28,6 +38,6 @@ Postulante >> getNombre [
 
 { #category : #printing }
 Postulante >> toString [ 
-^ 'Nombre: ', nombre, String cr,'Incumbencias: ' ,incumbencias asString. 
+^ 'Nombre: ', nombre, String cr,'Incumbencias: ' ,incumbencias asString .
 
 ]

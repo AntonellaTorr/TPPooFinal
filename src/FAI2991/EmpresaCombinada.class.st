@@ -20,7 +20,7 @@ emp inicializarCon:incun nombre:nomb tipo:tip rango:ran colProductos:prod.
 
 { #category : #'as yet unclassified' }
 EmpresaCombinada >> esEmpresaCombinada [ 
-^true.
+^true. 
 ]
 
 { #category : #'as yet unclassified' }

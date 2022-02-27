@@ -148,14 +148,14 @@ botonRegistrar
 				tipo: tipo selectedItem
 				rango: rango selectedItem
 				productos: colProductos. 
-				self update: UnGestor getColPostulantes
+				self update: UnGestor getColEmpresasSolicitantes 
 				 ].
 ]
 
 { #category : #'as yet unclassified' }
 RegistrarEmpresaSolicitante >> update:colActualizada [
 	colActualizada
-		ifEmpty: [ listadoEmpresasSol  setText: 'Listado Empresas Solicitantes' ]
+		ifEmpty: [ listadoEmpresasSol  setText: 'Listado empresas solicitantes Vacio' ]
 		ifNotEmpty: [ listadoEmpresasSol setText: (UnGestor  colAString: colActualizada ) ]. 
 
 ]

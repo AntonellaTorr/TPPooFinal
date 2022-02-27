@@ -98,9 +98,9 @@ ifFalse:[ colP:= OrderedCollection new. colP add: 'VACIA'.].
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> colAString: col [
 | cadena |
-"pasa la coleccion recibida por parametro a cadena"
     cadena := ''.
-    col do: [ :s |cadena := cadena ,s toString , String cr ].
+    col do: [ :s |cadena := cadena , String cr,s toString,String cr ].
+	cadena:=cadena, String cr.
     ^ cadena 
 ]
 
@@ -171,7 +171,7 @@ GestorDeEmpleos >> existeSolicitud:id [
 GestorDeEmpleos >> generarListadoEmpresasOrdenadas [
 "ordena las empreas solicitantes segun la cantidad de solicitudes resueltas"
 colEmpresasSolicitantes sorted: [ :a :b| a getCantSolicitudesResueltas  > b getCantSolicitudesResueltas ].
-colEmpresasSolicitantes changed. 
+self  changed:colEmpresasSolicitantes . 
 ^colEmpresasSolicitantes 
 ]
 
@@ -180,7 +180,7 @@ GestorDeEmpleos >> generarListadoSolFecha:fechaBuscada [
 |res|
 "busca las solicitudes que se presentaron en la fecha recibida por parametro"
 res:=colSolicitudesSinResolver select: [:solicitud| solicitud cumpleCondiciones:fechaBuscada].
-res changed.
+self changed:res.
 ^ res
 ]
 
@@ -192,14 +192,14 @@ empresaBuscada:= colEmpresasSolicitantes  detect:[:empresaSol| (empresaSol getEm
 (empresaBuscada isNotNil)
 "busca las solicitudes pendientes"
 ifTrue:[listado:= (empresaBuscada buscarSolicitudesPendientes)].
-listado changed.
+self changed:listado.
 ^listado.
 ]
 
 { #category : #'as yet unclassified' }
 GestorDeEmpleos >> generarListadoSolResueltas [
 "devuelve las solicitudes resueltas"
-colSolicitudesResueltas changed.
+
 ^colSolicitudesResueltas 
 ]
 
@@ -270,7 +270,7 @@ GestorDeEmpleos >> realizarPropuesta:sol posiblesPos:colPos [
 		nuevaP:=(Propuesta crearCon:sol postulante:postulante).
 		(self controlFraude:postulante solicitud:sol)
 		ifFalse: [colPropuestas add:nuevaP].
-		colPropuestas changed.
+		self changed:colPropuestas.
 		]
 		]. 
 	]
@@ -291,7 +291,7 @@ ifFalse:[empresaBuscada :=	self crearEmpresaSegunCorresponda: nombreEmpresa rubr
 "Crea empresa solicitante"
 	nuevaEmp:= EmpresaSolicitante crearUnaEmpresa: empresaBuscada.
 	colEmpresasSolicitantes add: nuevaEmp. 
-	colEmpresasSolicitantes changed.
+	self changed:colEmpresasSolicitantes .
 
 ]
 
@@ -301,7 +301,7 @@ GestorDeEmpleos >> registrarPostulante: incumb nombre:nombreP DNI:dni [
 res:= self existePostulante: nombreP. 
 (res = false) ifTrue:[ nuevoP := (Persona crear:incumb nombre:nombreP DNI:dni).
 	colPostulantes add:nuevoP.
-  colPostulantes changed.  ]. 
+  self  changed:colPostulantes.  ]. 
 
 ]
 
@@ -311,7 +311,7 @@ GestorDeEmpleos >> registrarPostulante: incumb nombre:nombreP tipo:tip rango:ran
 res:= self existePostulante: nombreP. 
 (res = false) ifTrue:[ nuevoP := (Empresa crearCon:incumb nombre:nombreP tipo:tip rango:ran ).
 	colPostulantes add:nuevoP.
-colPostulantes  changed.]. 
+self  changed:colPostulantes ]. 
 
 ]
 
@@ -321,7 +321,7 @@ GestorDeEmpleos >> registrarPostulante: incumb nombre:nombreP tipo:tip rango:ran
 res:= self existePostulante: nombreP. 
 (res = false) ifTrue:[ nuevoP := (EmpresaCombinada crearCon:incumb nombre:nombreP tipo:tip rango:ran colProductos:prod ).
 	colPostulantes add:nuevoP.
-colPostulantes changed. ]. 
+self changed: colPostulantes ]. 
 
 ]
 
@@ -335,7 +335,7 @@ ifTrue: [ (empresaBuscada:= res).
 	    solPendiente:= empresaBuscada  crearYAnadirSolicitudConId: unId fechaValidez: fechaVal caracteristicas:car.
 	colSolicitudesSinResolver add: solPendiente .
 	 ].
-colSolicitudesSinResolver changed]. 
+self changed:colSolicitudesSinResolver ]. 
 
 
 
@@ -352,7 +352,7 @@ ifTrue: [ (empresaBuscada:= res).
 	colSolicitudesSinResolver add: solPendiente.
 	 ].
 
-colSolicitudesSinResolver changed]. 
+self changed:colSolicitudesSinResolver ]. 
 ]
 
 { #category : #'as yet unclassified' }
@@ -366,7 +366,7 @@ ifTrue: [
 	solPendiente:= (empresaBuscada crearYAnadirSolicitudConId: unID fechaValidez: fechaVal caracteristicas:car tipo:tip monto:m producto:prod).
 	colSolicitudesSinResolver add: solPendiente ].
 	 .
-colSolicitudesSinResolver changed.]
+self changed:colSolicitudesSinResolver ]
 ]
 
 { #category : #'as yet unclassified' }

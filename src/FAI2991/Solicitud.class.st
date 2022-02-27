@@ -55,5 +55,5 @@ estado:=es.
 
 { #category : #printing }
 Solicitud >> toString [ 
-^'Solicitud con id: ', id asString, String cr,'FechaRegistro: ', (fechaRegistro  asString),String cr,'FechaValidez: ', (fechaValidez asString),String cr, 'Caracteristicas: ', caracteristicas,String cr,'Estado: ', estado. 
+^'Solicitud con id: ', id asString, String cr,'FechaRegistro: ', (fechaRegistro  asString),String cr,'FechaValidez: ', (fechaValidez asString),String cr, 'Caracteristicas: ', caracteristicas,String cr,'Estado: ', estado.
 ]

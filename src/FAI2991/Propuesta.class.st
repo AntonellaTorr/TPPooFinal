@@ -51,5 +51,5 @@ estado:=es.
 Propuesta >> toString [ 
 ^'Propuesta con :', String cr,
 '.', (solicitud toString),
-String cr, ' .Postulante ' ,(postulante toString).
+String cr, ' .Postulante ' ,(postulante toString),String cr.
 ]

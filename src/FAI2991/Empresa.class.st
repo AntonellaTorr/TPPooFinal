@@ -43,11 +43,6 @@ Empresa >> esEmpresaCombinada [
 ]
 
 { #category : #'as yet unclassified' }
-Empresa >> esPersona [
-^false.
-]
-
-{ #category : #'as yet unclassified' }
 Empresa >> inicializarCon:incun nombre:nomb tipo:tip rango:ran [ 
 incumbencias :=incun.
 nombre:= nomb.
@@ -66,7 +61,7 @@ Empresa >> puedeSerPostulante: monto tipo:ti [
 Empresa >> toString [
 |cadena|
 cadena:= super toString.
-^cadena, String cr, 'Tipo: ', tipo , String cr,'Rango: ', rango asString
+^cadena, String cr, 'Tipo: ', tipo , String cr,'Rango: ', rango asString.
 
 ]
 

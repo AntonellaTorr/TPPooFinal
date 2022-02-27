@@ -45,21 +45,6 @@ Boton >> initializeButton: aName [
 	self label: aName
 ]
 
-{ #category : #auxiliares }
-Boton >> modalBotonConfirmar [
-
-	self
-		color: (Color r: 0.0 g: 0.5 b: 0.8);
-		borderStyle: (RoundedBorder new
-				 cornerRadius: 5;
-				 width: 5;
-				 color: (Color r: 0.0 g: 0.5 b: 0.8));
-		font: (LogicalFont
-			 familyName: StandardFonts defaultFont familyName
-			 pointSize: 15);
-			centerText 
-]
-
 { #category : #mouse }
 Boton >> mouseAction: aEvent [
 

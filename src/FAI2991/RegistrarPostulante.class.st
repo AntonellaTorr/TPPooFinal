@@ -328,7 +328,7 @@ RegistrarPostulante >> registrarPostulantes [
 { #category : #'as yet unclassified' }
 RegistrarPostulante >> update:colPostulantes [
 	colPostulantes
-		ifEmpty: [ listadoPostulantes  setText: 'Listado Postulantes' ]
+		ifEmpty: [ listadoPostulantes  setText: 'Listado Postulantes Vacio' ]
 		ifNotEmpty: [ listadoPostulantes setText: (UnGestor  colAString: colPostulantes ) ]. 
 
 ]

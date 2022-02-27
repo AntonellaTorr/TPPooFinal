@@ -43,7 +43,7 @@ Persona >> esEmpresaCombinada [
 
 { #category : #'as yet unclassified' }
 Persona >> esPersona [
-^true.
+^true
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,6 +67,6 @@ exito:=false.
 Persona >> toString [
 |cadena|
 cadena:= super toString.
-^cadena, String cr, 'DNI: ', DNI. 
+^cadena, String cr, 'DNI: ', DNI.
 
 ]

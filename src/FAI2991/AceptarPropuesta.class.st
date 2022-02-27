@@ -46,6 +46,7 @@ botonBuscar mouseAction: [
 	botonBuscar hide.
 	botonSeleccionarProp show.
 	 botonSeleccionarProp mouseAction: [ UnGestor aceptarPropuesta: (id text asString) nombrePos: (nombreP text asString). 
+	
 		].
 	].
 
