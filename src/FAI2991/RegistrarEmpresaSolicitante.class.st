@@ -148,7 +148,6 @@ botonRegistrar
 				tipo: tipo selectedItem
 				rango: rango selectedItem
 				productos: colProductos. 
-				self update: UnGestor getColEmpresasSolicitantes 
 				 ].
 ]
 

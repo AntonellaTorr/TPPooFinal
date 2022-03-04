@@ -300,7 +300,7 @@ RegistrarPostulante >> registrarPostulantes [
 				(rubro3 buttonMorph selected)	ifTrue: [ colR add: rubro3 label ].
 				(rubro4 buttonMorph selected)	ifTrue: [ colR add: rubro4 label ].					
 				UnGestor registrarPostulante: colR nombre: nombre text asString DNI:DNI text asString	 .  
-				self update: UnGestor getColPostulantes.
+				
 			].
 	guardadoEmpresa  mouseAction: [  
 				colR2:= OrderedCollection new.
@@ -308,7 +308,7 @@ RegistrarPostulante >> registrarPostulantes [
 				(rubro2 buttonMorph selected) ifTrue: [ colR2 add: rubro2 label ].
 				(rubro3 buttonMorph selected)	ifTrue: [ colR2 add: rubro3 label ].
 				(rubro4 buttonMorph selected)	ifTrue: [ colR2 add: rubro4 label ].		
-				UnGestor registrarPostulante: colR2 nombre: nombre text asString tipo: tipo selectedItem rango: rango.  self update: UnGestor getColPostulantes.].
+				UnGestor registrarPostulante: colR2 nombre: nombre text asString tipo: tipo selectedItem rango: rango.  ].
 	
 	guardadoEmpresaC  mouseAction: [
 					colR3:= OrderedCollection new.
@@ -322,7 +322,7 @@ RegistrarPostulante >> registrarPostulantes [
 					(producto2) buttonMorph selected ifTrue: [ colP add: producto2 label ].
                (producto3) buttonMorph selected  ifTrue: [ colP add: producto3 label ] .
 		 UnGestor registrarPostulante:  colR3 nombre: nombre text asString tipo: tipo selectedItem rango: rango  colProductos:colP.
-	 self update: UnGestor getColPostulantes.].
+	].
 ]
 
 { #category : #'as yet unclassified' }

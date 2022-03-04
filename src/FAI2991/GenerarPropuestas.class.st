@@ -14,7 +14,7 @@ listado beReadOnly; extent: 500 @ 500; left: 100; top: 60.
 UnGestor addDependent: self. 
 self addMorph: listado.
 (UnGestor generarPropuestasSolicitudesPendientes).
-self update: (UnGestor getColPropuestas).
+
 
 ]
 
